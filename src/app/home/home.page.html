@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Weather Search</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-searchbar
+    [(ngModel)]="searchTerm"
+    (keyup.enter)="search()"
+    placeholder="Enter a city name"
+  ></ion-searchbar>
+
+  <ion-button expand="block" (click)="search()">Search</ion-button>
+
+  <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+
+  <p *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <ion-list *ngIf="cityResults.length > 0">
+    <ion-item *ngFor="let city of cityResults" (click)="selectCity(city)" button="true">
+      <ion-label>{{ city.name }}, {{ city.country }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="currentWeather && selectedCity" class="weather-card">
+    <h1>{{ selectedCity.name }}, {{ selectedCity.country }}</h1>
+    <p class="temperature">{{ currentWeather.temperature }}&deg;C</p>
+    <p>{{ weatherDescription() }}</p>
+    <p>Wind speed: {{ currentWeather.windspeed }} km/h</p>
+    <ion-button (click)="saveFavourite()">
+      <ion-icon slot="start" name="star"></ion-icon>
+      Save to favourites
+    </ion-button>
+  </div>
+</ion-content>

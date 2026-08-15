@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>My Location</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-button expand="block" (click)="useMyLocation()">Use my current location</ion-button>
+
+  <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+
+  <p *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <div *ngIf="currentWeather" class="weather-card">
+    <p>Lat: {{ latitude }}, Lon: {{ longitude }}</p>
+    <p class="temperature">{{ currentWeather.temperature }}&deg;C</p>
+    <p>{{ weatherDescription() }}</p>
+    <p>Wind speed: {{ currentWeather.windspeed }} km/h</p>
+  </div>
+</ion-content>
