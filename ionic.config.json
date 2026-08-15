@@ -1,0 +1,7 @@
+{
+  "name": "weathermate",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
